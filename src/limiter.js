@@ -24,26 +24,23 @@ you must update "last time you refilled"
 */
 
 
-function addTokens(bucket) {
-    const now = Date.now() / 1000; // current time in seconds
-    const elapsed = now - bucket.lastRefill;
+function refill(bucket, capacity, refillRate, nowSeconds) {
+    const elapsed = nowSeconds - bucket.lastRefill;
 
     console.log("Time passed: ", elapsed);
 
     // add tokens equals to time passed
-    bucket.tokens = bucket.tokens + elapsed;
-
-    // cap it to max 5 tokens
-    if(bucket.tokens > 5) {
-        bucket.tokens = 5;
-    }
+    const add = elapsed * refillRate;
+    bucket.tokens = Math.min(capacity, bucket.tokens + add);
 
     // update last refill time
-    bucket.lastRefill = now;
+    bucket.lastRefill = nowSeconds;
 
     return bucket.tokens;
 }
 
-const bucket = { tokens: 0, lastRefill: Date.now() / 1000 - 3};
-console.log("Tokens before: ", bucket.tokens);
-console.log("Tokens added: ", addTokens(bucket));
+const bucket = { tokens: 2, lastRefill: Date.now() / 1000 - 2};
+const now = Date.now()/1000;
+const newTokens = refill(bucket, 5, 1, now)
+
+console.log("Tokens added: ", newTokens);
