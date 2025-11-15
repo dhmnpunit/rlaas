@@ -39,8 +39,19 @@ function refill(bucket, capacity, refillRate, nowSeconds) {
     return bucket.tokens;
 }
 
-const bucket = { tokens: 2, lastRefill: Date.now() / 1000 - 2};
-const now = Date.now()/1000;
-const newTokens = refill(bucket, 5, 1, now)
+function consume(bucket, capacity, refillRate, nowSeconds) {
+    // refill first so bucket.tokens is up to date
+    const tokens = refill(bucket, capacity, refillRate, nowSeconds);
 
-console.log("Tokens added: ", newTokens);
+    if (tokens >= 1) {
+        // allow: remove one token
+        bucket.tokens = tokens - 1;
+        return { allowed: true, remaining: Math.floor(bucket.tokens) };
+    } else {
+        // blocked: how many seconds until next token?
+        const waitSeconds = (1 - tokens) / refillRate;
+        return { allowed: false, retryAfter: Math.ceil(waitSeconds), remaining: Math.floor(tokens)}
+    }
+}
+
+
