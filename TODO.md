@@ -1,0 +1,8 @@
+- [x] Create repo and clone locally
+- [x] Add README.md with project charter
+- [x] npm init -y and create package.json
+- [x] Create src/ directory and index.js skeleton
+- [ ] Implement in-memory token-bucket limiter middleware
+- [ ] Add demo script `scripts/demo.sh` to hit /test 8 times
+- [ ] Write short DESIGN.md with answers to 5 prompts
+- [ ] Commit, push dev branch, open PR to main

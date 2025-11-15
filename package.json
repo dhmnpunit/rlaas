@@ -16,5 +16,8 @@
     "url": "https://github.com/dhmnpunit/rlaas/issues"
   },
   "homepage": "https://github.com/dhmnpunit/rlaas#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
 }
