@@ -27,7 +27,7 @@ you must update "last time you refilled"
 function refill(bucket, capacity, refillRate, nowSeconds) {
     const elapsed = nowSeconds - bucket.lastRefill;
 
-    console.log("Time passed: ", elapsed);
+    // Time elapsed since last refill
 
     // add tokens equals to time passed
     const add = elapsed * refillRate;
@@ -50,8 +50,8 @@ function consume(bucket, capacity, refillRate, nowSeconds) {
     } else {
         // blocked: how many seconds until next token?
         const waitSeconds = (1 - tokens) / refillRate;
-        return { allowed: false, retryAfter: Math.ceil(waitSeconds), remaining: Math.floor(tokens)}
+        return { allowed: false, retryAfter: Math.ceil(waitSeconds), remaining: Math.floor(tokens) }
     }
 }
 
-
+module.exports = { refill, consume };

@@ -1,5 +1,5 @@
 // this map will store buckets per user
-// key -> bucekt object
+// key -> bucket object
 
 const BUCKETS = new Map();
 
